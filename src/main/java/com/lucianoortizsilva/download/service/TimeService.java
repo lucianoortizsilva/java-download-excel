@@ -5,8 +5,12 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.StringUtils;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -26,14 +30,14 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class TimeService {
 
-	private static final String[] HEADERS = { "NOME", "MASCOTE", "ESTÁDIO", "ESTADUAIS", "FUNDAÇÃO", "PATRIMONIO" };
+	private static final String[] HEADERS = { "NOME", "MASCOTE", "ESTÁDIO", "ESTADUAIS", "FUNDAÇÃO", "PATRIMÔNIO" };
 	private static final String ABA_NAME = "Times Do Brasil";
 	private static final String FORMAT = ".xlsx";
 	private TimeRepository repository;
 	
 	
 	
-	public File createReport() throws IOException {
+	public File createReportInFile() throws IOException {
 		File file = null;
 		final List<Line> lines = this.generateLines();
 		if (CollectionUtils.isNotEmpty(lines)) {
@@ -42,6 +46,19 @@ public class TimeService {
 		return file;
 	}
 
+	
+	
+	public String createReportStringInBase64() throws IOException {
+		final File file = this.createReportInFile();
+		String base64 = null;
+		if(!Objects.isNull(file)) {
+			final byte[] fileInBytes = FileUtils.readFileToByteArray(file);
+			final byte[] bytesBase64 = Base64.encodeBase64(fileInBytes);
+			base64 = StringUtils.newStringUtf8(bytesBase64);
+		}
+		return base64;
+	}
+	
 	
 	
 	private File generateFile(final List<Line> lines) throws IOException {
