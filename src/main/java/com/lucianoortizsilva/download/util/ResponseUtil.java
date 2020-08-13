@@ -1,4 +1,4 @@
-package com.lucianoortizsilva.download.excel.util;
+package com.lucianoortizsilva.download.util;
 
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -16,10 +16,11 @@ public class ResponseUtil {
 	
 	
 	public static ResponseEntity<Resource> ok(final Resource resource, final String filename) {
+		final MediaType mediaType = MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"); 
 		return ResponseEntity.ok()
-				.contentType(MediaType.parseMediaType("text/xlsx"))
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=\"" + filename + "\"")
-				.build();
+				.contentType(mediaType)
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + filename + "\"")
+				.body(resource);
 	}
 	
 	

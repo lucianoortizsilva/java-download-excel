@@ -1,4 +1,4 @@
-package com.lucianoortizsilva.download.excel.controller;
+package com.lucianoortizsilva.download.controller;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -12,8 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.lucianoortizsilva.download.excel.service.TimeService;
-import com.lucianoortizsilva.download.excel.util.ResponseUtil;
+import com.lucianoortizsilva.download.service.TimeService;
+import com.lucianoortizsilva.download.util.ResponseUtil;
 
 import lombok.AllArgsConstructor;
 
@@ -23,17 +23,17 @@ import lombok.AllArgsConstructor;
 public class TimeController {
 
 	private TimeService service;
-
+	
 	@RequestMapping(value = "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	public ResponseEntity<Resource> download() {
 		String filename = null;
 		Resource resource = null;
 		try {
-			final File file = this.service.criarArquivo();
+			final File file = this.service.createReport();
 			if (Objects.isNull(file)) {
 				return ResponseEntity.notFound().build();
 			}
-			Path path = Paths.get(file.getPath());
+			final Path path = Paths.get(file.getPath());
 			resource = new UrlResource(path.toUri());
 			filename = resource.getFilename();
 		} catch (final Exception e) {
