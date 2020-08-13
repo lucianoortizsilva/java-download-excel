@@ -14,16 +14,19 @@
 			<column name="nome" type="varchar(50)">
 				<constraints nullable="false" unique="true" />
 			</column>
-			<column name="apelido" type="varchar(30)">
-				<constraints nullable="false" />
-			</column>
 			<column name="mascote" type="varchar(30)">
 				<constraints nullable="false" />
 			</column>
 			<column name="estadio" type="varchar(60)">
 				<constraints nullable="false" />
 			</column>
-			<column name="fundacao" type="DATE">
+			<column name="titulos" type="int">
+				<constraints nullable="false" />
+			</column>
+			<column name="fundacao" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="patrimonio" type="NUMERIC(8,2)">
 				<constraints nullable="false" />
 			</column>
 		</createTable>
@@ -32,11 +35,11 @@
 
 	<changeSet id="202008111400" author="ortiz">
 		<sql>
-			insert into TIME (nome, apelido, mascote, estadio, fundacao) values ('Sport Club Internacional', 'Inter', 'Saci', 'Estádio Beira-Rio', '1909-04-04');
-			insert into TIME (nome, apelido, mascote, estadio, fundacao) values ('Esporte Clube Vitória', 'Vitória', 'Leão', 'Estádio Manoel Barradas - Barradão', '1899-05-13');
-			insert into TIME (nome, apelido, mascote, estadio, fundacao) values ('Cruzeiro Esporte Clube', 'Cruzeiro', 'Rapoza', 'Mineirão', '1921-01-02');
-			insert into TIME (nome, apelido, mascote, estadio, fundacao) values ('São Paulo Futebol Clube', 'São Paulo', 'Santo Paulo', 'Morumbi', '1930-01-25');
-			insert into TIME (nome, apelido, mascote, estadio, fundacao) values ('Fluminense Football Club', 'Fluminense', 'Guerreirinho', 'Laranjeiros', '1902-07-21');
+			insert into TIME (nome, mascote, estadio, titulos, fundacao, patrimonio) values ('Sport Club Internacional', 'Saci', 'Beira-Rio', 45, '1909-04-04 00:00:00.000', 998.656);
+			insert into TIME (nome, mascote, estadio, titulos, fundacao, patrimonio) values ('Esporte Clube Bahia', 'Super-Homem', 'Fonte Nova', 29, '1931-01-01 00:00:00.000', 125.659);
+			insert into TIME (nome, mascote, estadio, titulos, fundacao, patrimonio) values ('Cruzeiro Esporte Clube', 'Rapoza', 'Mineirão', 38, '1921-01-02 00:00:00.000', 745.659);
+			insert into TIME (nome, mascote, estadio, titulos, fundacao, patrimonio) values ('São Paulo Futebol Clube', 'Santo Paulo', 'Morumbi', 21, '1930-01-25 00:00:00.000', 444.845);
+			insert into TIME (nome, mascote, estadio, titulos, fundacao, patrimonio) values ('Fluminense Football Club', 'Guerreirinho', 'Laranjeiros', 31, '1902-07-21 00:00:00.000', 785.659);
 		</sql>
 	</changeSet>
 

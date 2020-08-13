@@ -2,6 +2,8 @@ package com.lucianoortizsilva.download.excel;
 
 
 
+import java.util.List;
+
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
@@ -60,6 +62,20 @@ public class Excel {
 			cell.setCellStyle(cellStyle);
 			cell.setCellValue(headers[i]);
 			sheet.autoSizeColumn(i);
+		}
+	}
+	
+	
+	
+	public static void createData(final Sheet sheet, final List<Line> lines) {
+		int countLine = 1;
+		for (final Line line : lines) {
+			final Row row = sheet.createRow(countLine);
+			for (final Column column : line.getColumns()) {
+				final Cell cell = row.createCell(column.getIndice());
+				column.getFormat().formatCell(sheet, cell, column);
+			}
+			countLine++;
 		}
 	}
 	

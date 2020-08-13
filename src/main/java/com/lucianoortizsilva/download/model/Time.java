@@ -1,7 +1,8 @@
 package com.lucianoortizsilva.download.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,9 +31,10 @@ public class Time implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	private String apelido;
 	private String estadio;
 	private String mascote;
-	private LocalDate fundacao;
+	private Integer titulos;
+	private LocalDateTime fundacao;
+	private BigDecimal patrimonio;
 
 }
