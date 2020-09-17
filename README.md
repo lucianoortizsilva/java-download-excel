@@ -19,7 +19,7 @@ Ao rodar o projeto, irá criar automaticamente uma base de dados, em um banco H2
 
 ![](https://github.com/lucianoortizsilva/java-download-excel/blob/master/src/main/resources/static/github/download-excel.jpg)
 
-<h>
+<hr>
 
 > **GET** http://localhost:8080/times/download/base64
 
