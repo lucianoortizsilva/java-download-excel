@@ -15,7 +15,9 @@ Execute o comando **`mvn spring-boot:run`**, e consuma algum endpoint.
 Ao rodar o projeto, irá criar automaticamente uma base de dados, em um banco H2 (via liquibase), inicializando com dados fakes de times de futebol, para gerar os relatórios. 
 
 > **GET** http://localhost:8080/times/download/excel    
+
 ![](https://github.com/lucianoortizsilva/java-download-excel/blob/master/src/main/resources/static/github/download-excel.jpg)
 
 > **GET** http://localhost:8080/times/download/base64
+
 ![](https://github.com/lucianoortizsilva/java-download-excel/blob/master/src/main/resources/static/github/download-base64.jpg)
