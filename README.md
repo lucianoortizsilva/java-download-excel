@@ -12,7 +12,7 @@ Um endpoint faz download do arquivo físico, o outro faz download do arquivo em 
 Como exemplo, irá exibir dados sobre estaduais de futebol pelo Brasil.
 
 ### Como rodar ?
-- Execute **`mvn clean package`**, e consuma algum endpoint.
+- Execute **`mvn clean package`**
 - Execute **`mvn spring-boot:run`**, e consuma algum endpoint.\
 Ao rodar o projeto, irá criar automaticamente uma base de dados, em um banco H2 (via liquibase).
 
