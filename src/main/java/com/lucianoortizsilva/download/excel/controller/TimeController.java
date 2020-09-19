@@ -1,4 +1,4 @@
-package com.lucianoortizsilva.download.controller;
+package com.lucianoortizsilva.download.excel.controller;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -13,8 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.lucianoortizsilva.download.service.TimeService;
-import com.lucianoortizsilva.download.util.ResponseUtil;
+import com.lucianoortizsilva.download.excel.service.TimeService;
+import com.lucianoortizsilva.download.excel.util.ResponseUtil;
 
 import lombok.AllArgsConstructor;
 
@@ -32,7 +32,7 @@ public class TimeController {
 		String filename = null;
 		Resource resource = null;
 		try {
-			final File file = this.service.createReportInFile();
+			final File file = this.service.generateFile();
 			if (Objects.isNull(file)) {
 				return ResponseEntity.notFound().build();
 			}
@@ -51,7 +51,7 @@ public class TimeController {
 	public ResponseEntity<String> base64() {
 		String base64 = null;
 		try {
-			base64 = this.service.createReportStringInBase64();
+			base64 = this.service.generateFileInBase64();
 			if (StringUtils.isEmpty(base64)) {
 				return ResponseEntity.notFound().build();
 			}

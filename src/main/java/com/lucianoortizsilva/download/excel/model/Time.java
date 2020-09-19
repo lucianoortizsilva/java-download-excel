@@ -1,4 +1,4 @@
-package com.lucianoortizsilva.download.model;
+package com.lucianoortizsilva.download.excel.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

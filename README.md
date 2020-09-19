@@ -7,7 +7,7 @@
 - H2
 
 ### O que é ?
-Dois Endpoints para download de planilha EXCEL. \
+Dois Endpoints + API para download de planilha EXCEL. \
 Um endpoint faz download do arquivo físico, o outro faz download do arquivo em Base64 \
 Como exemplo, irá exibir dados sobre estaduais de futebol pelo Brasil.
 

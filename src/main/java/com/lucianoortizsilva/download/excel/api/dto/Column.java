@@ -1,4 +1,4 @@
-package com.lucianoortizsilva.download.excel;
+package com.lucianoortizsilva.download.excel.api.dto;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;

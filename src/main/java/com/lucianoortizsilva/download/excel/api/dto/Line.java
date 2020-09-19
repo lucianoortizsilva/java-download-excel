@@ -1,4 +1,4 @@
-package com.lucianoortizsilva.download.excel;
+package com.lucianoortizsilva.download.excel.api.dto;
 
 import java.util.ArrayList;
 import java.util.List;

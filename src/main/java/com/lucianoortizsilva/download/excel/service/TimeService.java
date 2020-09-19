@@ -1,28 +1,21 @@
-package com.lucianoortizsilva.download.service;
+package com.lucianoortizsilva.download.excel.service;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.codec.binary.StringUtils;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Service;
 
-import com.lucianoortizsilva.download.excel.Column;
-import com.lucianoortizsilva.download.excel.Excel;
-import com.lucianoortizsilva.download.excel.Format;
-import com.lucianoortizsilva.download.excel.Line;
-import com.lucianoortizsilva.download.model.Time;
-import com.lucianoortizsilva.download.repository.TimeRepository;
-import com.lucianoortizsilva.download.util.FileUtil;
+import com.lucianoortizsilva.download.excel.api.ExcelApi;
+import com.lucianoortizsilva.download.excel.api.dto.Column;
+import com.lucianoortizsilva.download.excel.api.dto.Format;
+import com.lucianoortizsilva.download.excel.api.dto.Line;
+import com.lucianoortizsilva.download.excel.model.Time;
+import com.lucianoortizsilva.download.excel.repository.TimeRepository;
 
 import lombok.AllArgsConstructor;
 
@@ -33,42 +26,30 @@ public class TimeService {
 	private static final String[] HEADERS = { "NOME", "MASCOTE", "ESTÁDIO", "ESTADUAIS", "FUNDAÇÃO", "PATRIMÔNIO" };
 	private static final String ABA_NAME = "Times Do Brasil";
 	private static final String FORMAT = ".xlsx";
+	
 	private TimeRepository repository;
 	
 	
 	
-	public File createReportInFile() throws IOException {
+	public File generateFile() throws IOException {
 		File file = null;
 		final List<Line> lines = this.generateLines();
 		if (CollectionUtils.isNotEmpty(lines)) {
-			file = this.generateFile(lines);
+			file = ExcelApi.create(lines, HEADERS, FORMAT, ABA_NAME);
 		}
 		return file;
 	}
 
 	
 	
-	public String createReportStringInBase64() throws IOException {
-		final File file = this.createReportInFile();
+	public String generateFileInBase64() throws IOException {
 		String base64 = null;
-		if(!Objects.isNull(file)) {
-			final byte[] fileInBytes = FileUtils.readFileToByteArray(file);
-			final byte[] bytesBase64 = Base64.encodeBase64(fileInBytes);
-			base64 = StringUtils.newStringUtf8(bytesBase64);
+		final List<Line> lines = this.generateLines();
+		if (CollectionUtils.isNotEmpty(lines)) {
+			base64 = ExcelApi.createBase64(lines, HEADERS, FORMAT, ABA_NAME);
 		}
 		return base64;
 	}
-	
-	
-	
-	private File generateFile(final List<Line> lines) throws IOException {
-		final Workbook workbook = Excel.createWorkbook(FORMAT);
-		final Sheet sheet = Excel.createSheet(workbook, ABA_NAME);
-		Excel.createHeaders(sheet, HEADERS);
-		Excel.createData(sheet, lines);
-		return FileUtil.generateFile(workbook, FORMAT);
-	}
-
 	
 	
 	private List<Line> generateLines() {
@@ -76,7 +57,7 @@ public class TimeService {
 		final List<Line> lines = new ArrayList<>();
 		if (CollectionUtils.isNotEmpty(times)) {
 			for (final Time time : times) {
-				final Column column0 = new Column(0, 7000, time.getNome(), Format.TEXT, HorizontalAlignment.LEFT);
+				final Column column0 = new Column(0, 7000, time.getNome(),  Format.TEXT, HorizontalAlignment.LEFT);
 				final Column column1 = new Column(1, 4000, time.getMascote(), Format.TEXT, HorizontalAlignment.LEFT);
 				final Column column2 = new Column(2, 4000, time.getEstadio(), Format.TEXT, HorizontalAlignment.CENTER);
 				final Column column3 = new Column(3, 4000, time.getTitulos().toString(), Format.NUMERIC, HorizontalAlignment.CENTER);
